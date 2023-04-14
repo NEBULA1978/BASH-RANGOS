@@ -7,12 +7,15 @@ function generar_numero_aleatorio {
 }
 
 function jugar_apuestas {
-    saldo=1000
-    apuesta_inicial=1
+    echo "Ingresa el saldo inicial:"
+    read -r saldo
+    echo "Ingresa la cantidad de dinero que deseas apostar al inicio:"
+    read -r apuesta_inicial
     declare -A conteo_numeros
     conteo_par=0
     conteo_impar=0
     conteo_cero=0
+
 
     echo "Elije una opción:"
     echo "1. Par"
@@ -25,6 +28,7 @@ function jugar_apuestas {
 
     for ((i = 1; i <= num_veces; i++)); do
         if [ $saldo -le 0 ]; then
+            echo "Te has quedado sin dinero."
             break
         fi
 
@@ -68,22 +72,25 @@ function jugar_apuestas {
         echo "$num: ${conteo_numeros[$num]}"
     done
 
-    echo "Te has quedado sin dinero."
+    if [ $saldo -le 0 ]; then
+        echo "Te has quedado sin dinero."
+    fi
+
     echo "Presione Enter para continuar..."
     read
 }
 
 # Aquí está el menú de opciones
 opciones=(
-    "Jugar apuestas en números aleatorios en el rango [0, 36]:|jugar_apuestas"
-    "Salir:|exit 0"
+    "1. Jugar apuestas en números aleatorios en el rango [0, 36]:|jugar_apuestas"
+    "2. Salir:|exit 0"
 )
 
 while true; do
     clear
-    echo "Ingrese el número de la opción deseada:"
+    echo "Ingrese el número de la opción deseada 1 o 2:"
     for ((i = 1; i <= ${#opciones[@]}; i++)); do
-        echo "$i. ${opciones[$i - 1]%%|*}" # Imprimimos el índice de la opción y su nombre (sin el comando correspondiente).
+        echo "$i. ${opciones[$i - 1]%%|*}" # Imprimimos el comando correspondiente a la opción.
     done
 
     read -r opcion
@@ -92,7 +99,7 @@ while true; do
 
         clear
         comando="${opciones[$opcion - 1]#*|}" # Obtenemos el comando correspondiente a la opción seleccionada.
-        eval "$comando"                   # Ejecutamos el comando.
+        eval "$comando"                       # Ejecutamos el comando.
         echo ""
         echo "Presione Enter para continuar..."
         read
@@ -101,6 +108,7 @@ while true; do
         read
     fi
 done
+
 
 # Este es un script de Bash que simula un juego de apuestas en la ruleta. El usuario puede elegir entre apostar por números pares, impares o el número cero. Cada vez que se juega, se genera un número aleatorio entre 0 y 36, y se comprueba si el usuario ganó o perdió la apuesta. El saldo inicial es de 1000, y el usuario puede jugar tantas veces como desee, o hasta que se quede sin dinero.
 
