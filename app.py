@@ -83,3 +83,5 @@
 # if __name__ == "__main__":
 #     # Se inicia la aplicación usando el módulo Typer
 #     typer.run(main)
+
+# El código proporcionado implementa una interfaz de consola para interactuar con la API de OpenAI y su modelo ChatGPT. El usuario puede enviar mensajes al asistente virtual y recibir respuestas generadas por el modelo de lenguaje. La aplicación se ejecuta en un bucle infinito hasta que el usuario decide salir. Además, se implementan comandos adicionales para crear una nueva conversación y para salir de la aplicación. El código utiliza la librería Typer para gestionar la entrada del usuario por consola y la librería Rich para dar formato a la salida en la consola. También se proporcionan comentarios en el código para entender su funcionamiento y referencias a la documentación de las librerías y la API de OpenAI utilizadas.
